@@ -263,6 +263,20 @@
               "value": "Bearer jwt",
               "invert": true,
               "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "",
+              "value": "",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "",
+              "value": "",
+              "invert": false,
+              "operator": "equals"
             }
           ],
           "rulesOperator": "OR",

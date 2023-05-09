@@ -23,7 +23,7 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         var user = userRepository.findByEmail(email);
-        System.out.println(user);
+
         if (user.isEmpty()) {
             throw new UsernameNotFoundException(String.format("No user with email %s", email));
         }
