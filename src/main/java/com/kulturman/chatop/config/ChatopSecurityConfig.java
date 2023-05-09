@@ -33,7 +33,7 @@ public class ChatopSecurityConfig  {
         http.csrf()
                 .disable()
                 .authorizeRequests()
-                .antMatchers("/**/login","/**/register", "/swagger-ui/**", "/swagger-resources/**", "/v2/api-docs")
+                .antMatchers("/images/**", "/**/login","/**/register", "/swagger-ui/**", "/swagger-resources/**", "/v2/api-docs")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
