@@ -30,10 +30,7 @@ public class AuthorizationFilter extends OncePerRequestFilter {
 
         if (
             servletPath.contains("/auth/login") ||
-            servletPath.contains("/auth/register") ||
-            servletPath.contains("swagger") ||
-            servletPath.contains("images") ||
-            servletPath.contains("/api/docs")
+            servletPath.contains("/auth/register")
         ) {
             filterChain.doFilter(request, response);
             return;
