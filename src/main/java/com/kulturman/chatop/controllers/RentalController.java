@@ -1,5 +1,6 @@
 package com.kulturman.chatop.controllers;
 
+import com.kulturman.chatop.dtos.responses.GenericMessageResponse;
 import com.kulturman.chatop.dtos.responses.RentalResponse;
 import com.kulturman.chatop.entities.Rental;
 import com.kulturman.chatop.entities.User;
@@ -8,7 +9,6 @@ import com.kulturman.chatop.exceptions.NotFoundException;
 import com.kulturman.chatop.mappers.RentalMapper;
 import com.kulturman.chatop.services.FilesStorageService;
 import com.kulturman.chatop.services.RentalService;
-import org.springframework.beans.BeanUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +30,7 @@ public class RentalController {
     }
 
     @PostMapping
-    public ResponseEntity<?> create(
+    public ResponseEntity<GenericMessageResponse> create(
         @RequestParam("picture") MultipartFile picture,
         @RequestParam("name") String name,
         @RequestParam("surface") double surface ,
@@ -45,11 +45,11 @@ public class RentalController {
         var rental = new Rental(name, surface, price, description, fileName, owner);
         rentalService.save(rental);
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(new GenericMessageResponse("Rental created"));
     }
 
     @PutMapping("/{rentalId}")
-    public ResponseEntity<?> update(
+    public ResponseEntity<GenericMessageResponse> update(
         @RequestParam("name") String name,
         @RequestParam("surface") double surface ,
         @RequestParam("price") double price,
@@ -68,7 +68,7 @@ public class RentalController {
         rentalUpdated.setPrice(price);
         rentalUpdated.setDescription(description);
         rentalService.save(rentalUpdated);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(new GenericMessageResponse("Rental updated"));
     }
 
     @GetMapping("")
