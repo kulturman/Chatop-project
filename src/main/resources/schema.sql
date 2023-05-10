@@ -1,4 +1,4 @@
-CREATE TABLE `USERS` (
+CREATE TABLE IF NOT EXISTS `users` (
  `id` integer PRIMARY KEY AUTO_INCREMENT,
  `email` varchar(255),
  `name` varchar(255),
@@ -7,7 +7,7 @@ CREATE TABLE `USERS` (
  `updated_at` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
-CREATE TABLE `RENTALS` (
+CREATE TABLE IF NOT EXISTS `rentals` (
    `id` integer PRIMARY KEY AUTO_INCREMENT,
    `name` varchar(255),
    `surface` numeric,
@@ -19,7 +19,7 @@ CREATE TABLE `RENTALS` (
    `updated_at` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
-CREATE TABLE `MESSAGES` (
+CREATE TABLE IF NOT EXISTS `messages` (
     `id` integer PRIMARY KEY AUTO_INCREMENT,
     `rental_id` integer,
     `user_id` integer,
@@ -28,10 +28,10 @@ CREATE TABLE `MESSAGES` (
     `updated_at` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
-CREATE UNIQUE INDEX `USERS_index` ON `USERS` (`email`);
+CREATE UNIQUE INDEX `users_index` ON `users` (`email`);
 
-ALTER TABLE `RENTALS` ADD CONSTRAINT FOREIGN KEY (`owner_id`) REFERENCES `USERS` (`id`);
+ALTER TABLE `rentals` ADD CONSTRAINT FOREIGN KEY (`owner_id`) REFERENCES `users` (`id`);
 
-ALTER TABLE `MESSAGES` ADD FOREIGN KEY (`user_id`) REFERENCES `USERS` (`id`);
+ALTER TABLE `messages` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
-ALTER TABLE `MESSAGES` ADD FOREIGN KEY (`rental_id`) REFERENCES `RENTALS` (`id`);
+ALTER TABLE `messages` ADD FOREIGN KEY (`rental_id`) REFERENCES `rentals` (`id`);

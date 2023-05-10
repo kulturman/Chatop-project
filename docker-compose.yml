@@ -1,0 +1,17 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: 'chatop-mysql'
+    volumes:
+      - chatopdata:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=chatop
+      - MYSQL_DATABASE=chatop
+      - MYSQL_USER=chatop
+      - MYSQL_PASSWORD=chatop
+    ports:
+      - '3334:3306'
+
+volumes:
+  chatopdata:
