@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -67,6 +68,7 @@ public class RentalController {
         rentalUpdated.setSurface(surface);
         rentalUpdated.setPrice(price);
         rentalUpdated.setDescription(description);
+        rentalUpdated.setUpdatedAt(LocalDateTime.now());
         rentalService.save(rentalUpdated);
         return ResponseEntity.ok(new GenericMessageResponse("Rental updated"));
     }
