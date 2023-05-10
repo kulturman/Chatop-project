@@ -1,11 +1,9 @@
 package com.kulturman.chatop.services;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -15,6 +13,10 @@ import java.nio.file.Paths;
 public class FileSystemStorageService implements FilesStorageService {
     @Value("${app.uploadsDir}")
     private String uploadDir;
+    @Value("${app.url}")
+    private String appUrl;
+    @Value("${server.port}")
+    private String serverPort;
 
     @Override
     public String save(MultipartFile file) throws IOException {
@@ -26,11 +28,7 @@ public class FileSystemStorageService implements FilesStorageService {
 
     @Override
     public String getFileUrl(String filename) {
-        return null;
+        return String.format("%s:%s/images/%s", appUrl, serverPort, filename);
     }
 
-    @Override
-    public Resource load(String filename) {
-        return null;
-    }
 }
